@@ -10,7 +10,7 @@ def draw_floor():
 def create_pipe():
     random_pipe_pos = random.choice(pipe_height)
     bottom_pipe= pipe_surface.get_rect(midtop=(500,random_pipe_pos))
-    top_pipe= pipe_surface.get_rect(midtop=(500,random_pipe_pos-650))
+    top_pipe= pipe_surface.get_rect(midtop=(500,random_pipe_pos-750))
     return bottom_pipe,top_pipe
 def move_pipe(pipes):
     for pipe in pipes:
@@ -91,7 +91,7 @@ pipe_surface= pygame.transform.scale2x(pipe_surface)
 pipe_list= []
 #tạo  timer
 spawnpipe= pygame.USEREVENT
-pygame.time.set_timer(spawnpipe,1200)
+pygame.time.set_timer(spawnpipe,2000)
 pipe_height= [200,300,400]
 # tạo màn hình kết thúc
 game_over_surface= pygame.transform.scale2x(pygame.image.load('assets/message.png').convert_alpha())
@@ -120,18 +120,15 @@ class Button():
         if self.rect.collidepoint(pos):
             if pygame.mouse.get_pressed()[0]==1 and self.clicked==False:
                 self.clicked=True
-                 
+                action=True
+                print('A')
         if pygame.mouse.get_pressed()[0]==0:
-             self.clicked=False
-            
+             self.clicked=False           
         screen.blit(self.image,(self.rect.x, self.rect.y))
         return action
 button_turnoff= Button(100,20,button_sound_surface,2)
 #while loop của trò chơi
-while True:
-    
-    if button_turnoff.draw():
-        flap_sound.stop()
+while True:  
     for event in pygame.event.get():        
         if event.type== pygame.QUIT:
             pygame.quit()
